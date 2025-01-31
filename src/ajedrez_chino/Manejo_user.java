@@ -1,8 +1,11 @@
 package ajedrez_chino;
 
 public class Manejo_user {
-    Info_user [] infoUser = new Info_user[10];
+    Info_user [] infoUser;
     
+    public Manejo_user(){
+        infoUser = new Info_user[10];
+    }
 
     //Contador de usuarios registrados
     
@@ -21,37 +24,40 @@ public class Manejo_user {
         return cantUser(0,0);
     }
     
-    //buscar usuario por nombre
-    private boolean buscarUser(String name, int cont){
+    //buscar usuario por nombre         p         0 1
+    private Info_user buscarUser(String name, int cont){
         if(cont>=infoUser.length){
-            return false;
+            System.out.println(cont);
+            return null;
         }
         
-        if(infoUser[cont].getNombre().equals(name) && infoUser[cont].getNombre()!=null){
-           return true;
+        if(infoUser[cont]!=null && infoUser[cont].getNombre().equals(name)){
+           return infoUser[cont];
         }
         
         return buscarUser(name, cont+1);
     }
     
-    public boolean buscarUser(String name){
+    public Info_user buscarUser(String name){
         return buscarUser(name, 0);
     }
     
     //bucar usuario por nombre y contraseña
-    private boolean buscarUserNC(String name, String contra, int cont){
+    private Info_user buscarUserNC(String name, String contra, int cont){
         if(cont>=infoUser.length){
-            return false;
+            return null;
         }
         
-        if(infoUser[cont].getNombre().equals(name) && infoUser[cont].getContraseña().equals(contra) && infoUser[cont].getNombre()!=null){
-           return true;
+        if(infoUser[cont]!=null){
+            if(infoUser[cont].getNombre().equals(name) && infoUser[cont].getContraseña().equals(contra)){
+           return infoUser[cont];
+            }
         }
         
         return buscarUserNC(name, contra, cont+1);
     }
     
-    public boolean buscarUserNC(String name, String contra){
+    public Info_user buscarUserNC(String name, String contra){
         return buscarUserNC(name, contra, 0);
     }
     
@@ -64,7 +70,10 @@ public class Manejo_user {
         }
         
         if(infoUser[cont]==null){
+            
            infoUser[cont]= new Info_user(name, contra);
+           System.out.println("Usuario agregado: " + name);
+            System.out.println("Usuario en arreglo: "+ infoUser[cont].getNombre());
            return;
         }
         if(infoUser[cont]!=null){

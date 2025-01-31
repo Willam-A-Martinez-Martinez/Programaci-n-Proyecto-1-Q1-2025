@@ -6,6 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JToggleButton;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
@@ -38,6 +41,18 @@ public class Grafico {
         a.setText(text);
     }
     
+    public void textfield(JTextField a, int x, int y, int width, int heigth, String font, int fSize){
+        a.setBounds(x, y, width, heigth);
+        a.setText("");
+        a.setFont(new Font(font, Font.PLAIN, fSize));
+    }
+    
+    public void passwordfield(JPasswordField a, int x, int y, int width, int heigth, String font, int fSize){
+        a.setBounds(x, y, width, heigth);
+        a.setText("");
+        a.setFont(new Font(font, Font.PLAIN, fSize));
+    }
+    
     public void boton(JButton a,int x, int y, int width, int heigth, boolean setBorderPainted, boolean setContentAreaFilled, String font, int size, String texto, int r , int g, int b, int opaque){
         a.setBounds(x, y, width, heigth);
         a.setBorderPainted(setBorderPainted);
@@ -45,5 +60,15 @@ public class Grafico {
         a.setFont(new Font(font, Font.BOLD, size));
         a.setText(texto);
         a.setForeground(new Color(r, g, b, opaque));
+    }
+    
+    public void toggleButton(JToggleButton a,int x, int y, int width, int heigth, boolean setBorderPainted, boolean setContentAreaFilled, String font, int size, String texto, int r , int g, int b, int opaque){
+        a.setBounds(x, y, width, heigth);
+        a.setBorderPainted(setBorderPainted);
+        a.setContentAreaFilled(setContentAreaFilled);
+        a.setFont(new Font(font, Font.BOLD, size));
+        a.setText(texto);
+        a.setForeground(new Color(r, g, b, opaque));
+        
     }
 }

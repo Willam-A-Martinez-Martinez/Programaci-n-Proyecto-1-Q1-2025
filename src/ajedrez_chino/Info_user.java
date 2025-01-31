@@ -10,10 +10,10 @@ import java.util.Calendar;
 public class Info_user {
     private String contraseña, nombre, fecha;
     private int puntos, partidasG, partidasP;
-
+    private boolean activo;
     
     
-    public Info_user(String contraseña, String nombre){
+    public Info_user(String nombre, String contraseña){
         this.contraseña = contraseña;
         this.nombre = nombre;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -21,6 +21,7 @@ public class Info_user {
         this.partidasG = 0;
         this.partidasP = 0;
         puntos=0;
+        activo=true;
     }
 
     public String getContraseña() {
