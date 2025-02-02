@@ -43,7 +43,7 @@ public class Log_Partida {
     
     
     
-    public String logPartida(){
-        return "Judador 1: "+jugador1+"| Jugador 2: "+jugador2+"\nGanador: "+ganador;
+    public String logPartidaImprimir(){
+        return "Judador 1: "+jugador1+"| Jugador 2: "+jugador2+"\nGanador: "+ganador+"\n";
     }
 }

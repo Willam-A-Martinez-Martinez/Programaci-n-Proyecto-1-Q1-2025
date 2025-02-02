@@ -11,7 +11,7 @@ public class Manejo_user {
     
     private int cantUser(int cont, int cant){
         if(cont<infoUser.length){
-            if(infoUser[cont]!=null){
+            if(infoUser[cont]!=null && infoUser[cont].getNombre()!=null){
                 return cantUser(cont+1, cant+1);
             }
             return cantUser(cont+1, cant);
@@ -109,11 +109,11 @@ public class Manejo_user {
     }
     
     public String rankingJugadores(){
-        String ranking="";
+        String ranking="Ranking de jugadores\n\nPuesto - Jugador - Puntos\n";
         Info_user temp;
         
-        for (int i = 0; i < infoUser.length; i++) {
-            for (int j = 1; j < infoUser.length; j++) {
+        for (int i = 0; i < cantUserHelp(); i++) {
+            for (int j = 1; j < cantUserHelp(); j++) {
                 if(infoUser[i].getNombre()!=null){
                     if(infoUser[j-1].getPuntos()<infoUser[j].getPuntos()){
                         temp=infoUser[j-1];
@@ -124,9 +124,11 @@ public class Manejo_user {
             }
         }
         
-        for (int i = 0; i < infoUser.length; i++) {
-            if(infoUser[i].getNombre()!=null)
-                ranking=i+"-"+infoUser[i].getNombre()+"-"+infoUser[i].getPuntos();
+        for (int i = 0; i < cantUserHelp(); i++) {
+            if(infoUser[i].getNombre()!=null){
+                ranking+="      "+(i+1)+"     -       "+infoUser[i].getNombre()+"     -     "+infoUser[i].getPuntos()+"\n";
+                System.out.println(ranking);
+            }
         }
         
         return ranking;

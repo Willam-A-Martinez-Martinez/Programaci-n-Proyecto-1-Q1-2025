@@ -4,6 +4,8 @@
  */
 package ajedrez_chino;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -13,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
 /**
@@ -32,7 +35,8 @@ public class Pg_Principal extends Grafico{
     JLabel fecha = new JLabel();
     JLabel activo = new JLabel();
     JLabel tituloMini = new JLabel();
-    JLabel contenedorScroll = new JLabel();
+    
+    JTextArea contenedorScroll = new JTextArea();
     
     //botonMiniVentana, nuevaPartida, miCuenta, verMiInformacion, cambiarPassword, cerrarMiCuenta, reportesMenu, rankingJugadores, logsDeJuegos, logOut
     JButton nuevaPartida = new JButton();
@@ -48,7 +52,7 @@ public class Pg_Principal extends Grafico{
     JButton logOut = new JButton();
     JPasswordField passwordField = new JPasswordField();
     
-    JScrollPane scrollPane = new JScrollPane();
+    JScrollPane scrollPane = new JScrollPane(contenedorScroll);
 
     
     //Imagenes
@@ -83,12 +87,12 @@ public class Pg_Principal extends Grafico{
         frame.add(nuevaPartida);
         frame.add(miCuenta);
         frame.add(miniVentana);
+        frame.add(scrollPane);
         frame.add(reportesMenu);
         frame.add(logOut);
         frame.add(verMiInformacion);
         frame.add(cerrarMiCuenta);
         frame.add(cambiarPassword);
-        
         frame.add(rankingJugadores);
         frame.add(logsDeJuegos);
         frame.add(backgroundForWords);
@@ -136,6 +140,8 @@ public class Pg_Principal extends Grafico{
         //Password
         titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
         
+//        titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
+        
         //TITULO
         titulo(menuPrincipal, 150, 71, 300, 50, "Dialog", 28, 237, 235, 130, 250, "Menu principal");
 
@@ -164,6 +170,10 @@ public class Pg_Principal extends Grafico{
         toggleButton(reportesMenu, 100, 320, 235, 42, false, false, "Dialog", 28, "Reportes", 237, 235, 130, 250);
         reportesMenu.setSelected(false); 
         
+        scrollPane.setVisible(false);
+        
+        
+            
             //BOTON 3.1 Ranking Jugadores
             toggleButton(rankingJugadores, 160, 360, 340, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
         
@@ -336,28 +346,67 @@ public class Pg_Principal extends Grafico{
             if(reportesMenu.isSelected()){
                 rankingJugadores.setText("Ranking de jugadores");
                 logsDeJuegos.setText("Logs de juegos");
-                miCuentaTitulo.setText("Reportes");
                 
                 logOut.setLocation(90, 440);
+                cerrarMiCuenta.setLocation(0, 0);
                 
                 rankingJugadores.setEnabled(true);
                 logsDeJuegos.setEnabled(true);
                 miCuenta.setEnabled(false);
-                miCuentaTitulo.setVisible(true);
-                miniVentana.setOpaque(true);
                 
             }else{
                 miCuentaTitulo.setText("");
                 rankingJugadores.setText("");
                 logsDeJuegos.setText("");
                 
+                
+                scrollPane.setVisible(false);
                 rankingJugadores.setEnabled(false);
                 logsDeJuegos.setEnabled(false);
                 miCuentaTitulo.setVisible(false);
                 miCuenta.setEnabled(true);
+                
+                rankingJugadores.setSelected(false);
+                logsDeJuegos.setSelected(false);
+                
                 logOut.setLocation(90, 390);
+                cerrarMiCuenta.setLocation(155, 370);
                 
                 miniVentana.setOpaque(false);
+            }
+        });
+        
+        rankingJugadores.addActionListener((ActionEvent e) -> {
+            if(rankingJugadores.isSelected()){
+                
+                contenedorScroll.setText(pgInicial.manejoUser.rankingJugadores());
+                contenedorScroll.setFont(new Font("Dialog", Font.BOLD, 30));
+                contenedorScroll.setForeground(new Color(237, 235, 130, 250));
+                contenedorScroll.setEditable(false);
+                contenedorScroll.setBackground(new Color(171, 49, 19, 220));
+
+                logsDeJuegos.setSelected(false);
+                
+                scrollPane.setBounds(600, 200, 500, 350);
+                scrollPane.setOpaque(false);
+                scrollPane.setVisible(true);
+            }else{
+                scrollPane.setVisible(false);
+            }
+        });
+        
+        logsDeJuegos.addActionListener((ActionEvent e) -> {
+            if(logsDeJuegos.isSelected()){
+                contenedorScroll.setText(logUser.imprimirLogsJuegos());
+                contenedorScroll.setFont(new Font("Dialog", Font.BOLD, 30));
+                contenedorScroll.setForeground(new Color(237, 235, 130, 250));
+                contenedorScroll.setEditable(false);
+                contenedorScroll.setBackground(new Color(171, 49, 19, 220));
+                
+                rankingJugadores.setSelected(false);
+                scrollPane.setVisible(true);
+            }else{
+                scrollPane.setVisible(false);
             }
         });
         
