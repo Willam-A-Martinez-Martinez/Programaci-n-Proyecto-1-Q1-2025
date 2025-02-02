@@ -49,6 +49,8 @@ public class Info_user {
         this.activo = activo;
     }
     
-    
+    public String puntos(){
+        return nombre+"-"+puntos;
+    }
     
 }

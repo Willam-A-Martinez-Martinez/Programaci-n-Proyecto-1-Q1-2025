@@ -81,8 +81,4 @@ public class Pg_Inicial extends Grafico{
     }
     
         
-    public static void main(String[] args) {
-        new Pg_Inicial();
-    }
-        
 }

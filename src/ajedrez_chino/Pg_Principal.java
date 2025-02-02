@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -31,6 +32,8 @@ public class Pg_Principal extends Grafico{
     JLabel fecha = new JLabel();
     JLabel activo = new JLabel();
     JLabel tituloMini = new JLabel();
+    JLabel contenedorScroll = new JLabel();
+    
     //botonMiniVentana, nuevaPartida, miCuenta, verMiInformacion, cambiarPassword, cerrarMiCuenta, reportesMenu, rankingJugadores, logsDeJuegos, logOut
     JButton nuevaPartida = new JButton();
     JToggleButton botonCambiarContra= new JToggleButton();
@@ -44,6 +47,8 @@ public class Pg_Principal extends Grafico{
     JToggleButton logsDeJuegos = new JToggleButton();
     JButton logOut = new JButton();
     JPasswordField passwordField = new JPasswordField();
+    
+    JScrollPane scrollPane = new JScrollPane();
 
     
     //Imagenes
@@ -228,18 +233,15 @@ public class Pg_Principal extends Grafico{
                 activo.setText("");
                 
                 passwordField.setVisible(false);
+                cambiarPassword.setSelected(false);
+                cerrarMiCuenta.setSelected(false);
+                miCuentaTitulo.setVisible(false);
+                miniVentana.setOpaque(false);
+                
+                botonCerrarCuenta.setText("");
                 tituloMini.setText("");
                 botonCambiarContra.setText("");
                 botonCerrarCuenta.setText("");
-                
-                cambiarPassword.setSelected(false);
-                cerrarMiCuenta.setSelected(false);
-                
-                tituloMini.setText("");
-                botonCerrarCuenta.setText("");
-                
-                miCuentaTitulo.setVisible(false);
-                miniVentana.setOpaque(false);
             }
         });
         
@@ -334,22 +336,28 @@ public class Pg_Principal extends Grafico{
             if(reportesMenu.isSelected()){
                 rankingJugadores.setText("Ranking de jugadores");
                 logsDeJuegos.setText("Logs de juegos");
+                miCuentaTitulo.setText("Reportes");
                 
                 logOut.setLocation(90, 440);
                 
                 rankingJugadores.setEnabled(true);
                 logsDeJuegos.setEnabled(true);
                 miCuenta.setEnabled(false);
+                miCuentaTitulo.setVisible(true);
+                miniVentana.setOpaque(true);
                 
             }else{
+                miCuentaTitulo.setText("");
                 rankingJugadores.setText("");
                 logsDeJuegos.setText("");
                 
                 rankingJugadores.setEnabled(false);
                 logsDeJuegos.setEnabled(false);
-                
+                miCuentaTitulo.setVisible(false);
                 miCuenta.setEnabled(true);
                 logOut.setLocation(90, 390);
+                
+                miniVentana.setOpaque(false);
             }
         });
         

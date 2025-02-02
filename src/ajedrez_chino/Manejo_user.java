@@ -107,4 +107,28 @@ public class Manejo_user {
     public void eliminarUser(String name, String contra){
         eliminarUser(name, contra, 0);
     }
+    
+    public String rankingJugadores(){
+        String ranking="";
+        Info_user temp;
+        
+        for (int i = 0; i < infoUser.length; i++) {
+            for (int j = 1; j < infoUser.length; j++) {
+                if(infoUser[i].getNombre()!=null){
+                    if(infoUser[j-1].getPuntos()<infoUser[j].getPuntos()){
+                        temp=infoUser[j-1];
+                        infoUser[j-1]=infoUser[j];
+                        infoUser[j]=temp;
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < infoUser.length; i++) {
+            if(infoUser[i].getNombre()!=null)
+                ranking=i+"-"+infoUser[i].getNombre()+"-"+infoUser[i].getPuntos();
+        }
+        
+        return ranking;
+    }
 }
