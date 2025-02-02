@@ -94,6 +94,7 @@ public class Iniciar_sesion extends Grafico{
             
             if(contraseña.length()==5 && pgInicial.manejoUser.buscarUserNC(nombre, contraseña)!=null){
                 JOptionPane.showMessageDialog(null, "Se ha iniciado sesion exitosamente!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                pgInicial.nombre=nombre;
                 Pg_Principal pgPrincipal= new Pg_Principal(pgInicial);
                 pgPrincipal.frame.setVisible(true);
                 frame.dispose();

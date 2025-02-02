@@ -24,6 +24,8 @@ public class Pg_Inicial extends Grafico{
     //Info de usuarios
     Manejo_user manejoUser;
     
+    String nombre;
+    
     public Pg_Inicial(){
         manejoUser =new Manejo_user();
         //FRAME

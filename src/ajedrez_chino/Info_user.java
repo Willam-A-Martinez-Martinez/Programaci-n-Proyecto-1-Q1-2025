@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ajedrez_chino;
 
 import java.text.SimpleDateFormat;
@@ -9,17 +5,15 @@ import java.util.Calendar;
         
 public class Info_user {
     private String contraseña, nombre, fecha;
-    private int puntos, partidasG, partidasP;
+    private int puntos;
     private boolean activo;
     
     
     public Info_user(String nombre, String contraseña){
         this.contraseña = contraseña;
         this.nombre = nombre;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
         fecha = dateFormat.format(Calendar.getInstance().getTime());
-        this.partidasG = 0;
-        this.partidasP = 0;
         puntos=0;
         activo=true;
     }
@@ -31,15 +25,6 @@ public class Info_user {
     public String getNombre() {
         return nombre;
     }
-
-    public int getPartidasG() {
-        return partidasG;
-    }
-
-    public int getPartidasP() {
-        return partidasP;
-    }
-
     public String getFecha() {
         return fecha;
     }
@@ -48,16 +33,20 @@ public class Info_user {
         return puntos;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
 
-    public void setPartidasG(int partidasG) {
-        this.partidasG = partidasG;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
-    public void setPartidasP(int partidasP) {
-        this.partidasP = partidasP;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
     

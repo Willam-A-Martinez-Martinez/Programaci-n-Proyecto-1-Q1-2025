@@ -4,11 +4,14 @@
  */
 package ajedrez_chino;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JToggleButton;
 
 /**
@@ -22,20 +25,31 @@ public class Pg_Principal extends Grafico{
     JLabel backgroundForWords = new JLabel();
     JLabel background = new JLabel();
     JLabel miniVentana = new JLabel();
+    JLabel miCuentaTitulo = new JLabel();
+    JLabel nombre = new JLabel();
+    JLabel puntos = new JLabel();
+    JLabel fecha = new JLabel();
+    JLabel activo = new JLabel();
+    JLabel tituloMini = new JLabel();
+    //botonMiniVentana, nuevaPartida, miCuenta, verMiInformacion, cambiarPassword, cerrarMiCuenta, reportesMenu, rankingJugadores, logsDeJuegos, logOut
     JButton nuevaPartida = new JButton();
+    JToggleButton botonCambiarContra= new JToggleButton();
+    JToggleButton botonCerrarCuenta= new JToggleButton();
     JToggleButton miCuenta = new JToggleButton();
     JToggleButton verMiInformacion = new JToggleButton();
-    JButton cambiarPassword = new JButton();
-    JButton cerrarMiCuenta = new JButton();
+    JToggleButton cambiarPassword = new JToggleButton();
+    JToggleButton cerrarMiCuenta = new JToggleButton();
     JToggleButton reportesMenu = new JToggleButton();
-    JButton rankingJugadores = new JButton();
-    JButton logsDeJuegos = new JButton();
+    JToggleButton rankingJugadores = new JToggleButton();
+    JToggleButton logsDeJuegos = new JToggleButton();
     JButton logOut = new JButton();
-    
+    JPasswordField passwordField = new JPasswordField();
 
     
     //Imagenes
     ImageIcon logoXiangqi= new ImageIcon("src/Imagenes/xiangqi.png");
+    ImageIcon logoRSize = new ImageIcon(new ImageIcon("src/Imagenes/xiangqi.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+    
     ImageIcon backgroundI= new ImageIcon("src/Imagenes/Background.gif");
     
     //Info de usuarios
@@ -45,9 +59,21 @@ public class Pg_Principal extends Grafico{
     public Pg_Principal(Pg_Inicial pgInicial){
         this.pgInicial =pgInicial;
         
+        Info_user logUser = pgInicial.manejoUser.buscarUser(pgInicial.nombre);
+        
+        
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
 
+        frame.add(tituloMini);
+        frame.add(botonCambiarContra);
+        frame.add(botonCerrarCuenta);
+        frame.add(passwordField);
+        frame.add(miCuentaTitulo);
+        frame.add(nombre);
+        frame.add(puntos);
+        frame.add(fecha);
+        frame.add(activo);
         frame.add(menuPrincipal);
         frame.add(nuevaPartida);
         frame.add(miCuenta);
@@ -55,13 +81,16 @@ public class Pg_Principal extends Grafico{
         frame.add(reportesMenu);
         frame.add(logOut);
         frame.add(verMiInformacion);
-        frame.add(cambiarPassword);
         frame.add(cerrarMiCuenta);
+        frame.add(cambiarPassword);
+        
         frame.add(rankingJugadores);
         frame.add(logsDeJuegos);
         frame.add(backgroundForWords);
         frame.add(background);
         frame.setVisible(true);
+        
+        
         
         //BACKGROUND
         fondo(background, 50, 50, backgroundI, frame);
@@ -70,7 +99,37 @@ public class Pg_Principal extends Grafico{
 
         //Mini ventana
         
-        postBackground(miniVentana, 500, 100, 700, 500, 171, 49, 19, 220, true);
+        postBackground(miniVentana, 500, 100, 700, 500, 171, 49, 19, 220, false);
+        
+        //mi cuenta Titulo
+        
+        titulo(miCuentaTitulo, 800, 125, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
+        miCuentaTitulo.setIcon(logoRSize);//miCuentaTitulo, nombre, puntos, fecha, activo
+        miCuentaTitulo.setVisible(false);
+        
+        //BOTON 2.1.1.1
+        toggleButton(botonCambiarContra, 715, 475, 300, 42, false, false, "Dialog", 20, "", 237, 235, 130, 250);
+        
+        toggleButton(botonCerrarCuenta, 715, 450, 300, 42, false, false, "Dialog", 20, "", 237, 235, 130, 250);
+        
+        //passwordfield
+        passwordfield(passwordField, 775, 400, 170, 30, "Dialog", 20);
+        passwordField.setVisible(false);
+        
+        //Nombre  Nombre: ,Puntos: ,Fecha de ingreso: , Estado de actividad:
+        titulo(nombre, 550, 190, 300, 50, "Dialog", 20, 237, 235, 130, 250, "");
+        
+        //puntos
+        titulo(puntos, 550, 260, 300, 50, "Dialog", 20, 237, 235, 130, 250, "");
+        
+        //fecha
+        titulo(fecha, 800, 190, 300, 50, "Dialog", 20, 237, 235, 130, 250, "");
+        
+        //activo
+        titulo(activo, 800, 260, 300, 50, "Dialog", 20, 237, 235, 130, 250, "");
+        
+        //Password
+        titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
         
         //TITULO
         titulo(menuPrincipal, 150, 71, 300, 50, "Dialog", 28, 237, 235, 130, 250, "Menu principal");
@@ -89,11 +148,11 @@ public class Pg_Principal extends Grafico{
                 //Ver Mi Información, Cambiar Password, Cerrar mi Cuenta
 
                 //BOTON 2.1.1 Cambiar password
-                boton(cambiarPassword, 180, 330, 300, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
+                toggleButton(cambiarPassword, 180, 330, 300, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
                 cambiarPassword.setEnabled(false);
                 
                 //BOTON 2.1.2 cerrar mi cuenta
-                boton(cerrarMiCuenta, 155, 370, 325, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
+                toggleButton(cerrarMiCuenta, 155, 370, 325, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
                 cerrarMiCuenta.setEnabled(false);
                 
         //BOTON 3 reportesMenu
@@ -101,14 +160,16 @@ public class Pg_Principal extends Grafico{
         reportesMenu.setSelected(false); 
         
             //BOTON 3.1 Ranking Jugadores
-            boton(rankingJugadores, 160, 360, 340, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
+            toggleButton(rankingJugadores, 160, 360, 340, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
         
             //BOTON 3.2 Logs de mis últimos juegos
-            boton(logsDeJuegos, 150, 400, 270, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
+            toggleButton(logsDeJuegos, 150, 400, 270, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
         
             //rankingJugadores, logsDeJuegos
         //BOTON 4 log out
         boton(logOut, 90, 390, 235, 42, false, false, "Dialog", 28, "Log out", 237, 235, 130, 250);
+        
+        
 
         
         
@@ -131,6 +192,21 @@ public class Pg_Principal extends Grafico{
                 reportesMenu.setLocation(100, 410);
                 logOut.setLocation(90, 480);
                 reportesMenu.setEnabled(false);
+                //miCuentaTitulo, nombre, puntos, fecha, activo
+                //Nombre: ,Puntos: ,Fecha de ingreso: , Estado de actividad:
+                String activoStr="";
+        
+                if(logUser.isActivo()){
+                    activoStr="Activo";
+                }
+                miCuentaTitulo.setText("Mi cuenta");
+                nombre.setText("Nombre: "+logUser.getNombre());
+                puntos.setText("Puntos: "+logUser.getPuntos());
+                fecha.setText("Fecha de ingreso: "+logUser.getFecha());
+                activo.setText("Estado de actividad: "+activoStr);
+                
+                miCuentaTitulo.setVisible(true);
+                miniVentana.setOpaque(true);
             }else{
                 verMiInformacion.setText("");
                 cambiarPassword.setText("");
@@ -144,6 +220,113 @@ public class Pg_Principal extends Grafico{
                 
                 reportesMenu.setLocation(100, 320);
                 logOut.setLocation(90, 390);
+                
+                miCuentaTitulo.setText("");
+                nombre.setText("");
+                puntos.setText("");
+                fecha.setText("");
+                activo.setText("");
+                
+                passwordField.setVisible(false);
+                tituloMini.setText("");
+                botonCambiarContra.setText("");
+                botonCerrarCuenta.setText("");
+                
+                cambiarPassword.setSelected(false);
+                cerrarMiCuenta.setSelected(false);
+                
+                tituloMini.setText("");
+                botonCerrarCuenta.setText("");
+                
+                miCuentaTitulo.setVisible(false);
+                miniVentana.setOpaque(false);
+            }
+        });
+        
+        cambiarPassword.addActionListener((ActionEvent e) -> {
+            if(cambiarPassword.isSelected()){
+                cerrarMiCuenta.setSelected(false);
+                passwordField.setVisible(true);
+                tituloMini.setText("Cambio contraseña");
+                botonCambiarContra.setText("Cambiar contraseña");
+                botonCerrarCuenta.setText("");
+            }else{
+                passwordField.setVisible(false);
+                tituloMini.setText("");
+                botonCambiarContra.setText("");
+                botonCerrarCuenta.setText("");
+            }
+        });
+        
+        cerrarMiCuenta.addActionListener((ActionEvent e) -> {
+            if(cerrarMiCuenta.isSelected()){
+                System.out.println("True cerrarMiCuenta");
+                cambiarPassword.setSelected(false);
+                passwordField.setVisible(true);
+                tituloMini.setText("Cierre de cuenta");
+                botonCerrarCuenta.setText("Cerrar cuenta");
+                botonCambiarContra.setText("");
+            }else{
+                System.out.println("Cerrar mi cuenta toggle button accede aqui");
+                passwordField.setVisible(false);
+                tituloMini.setText("");
+                botonCerrarCuenta.setText("");
+            }
+        });
+                
+        botonCambiarContra.addActionListener((ActionEvent e) -> {
+            String contraseña1="", contraseña2="";
+            if(botonCambiarContra.isSelected()){
+                contraseña1= String.valueOf(passwordField.getPassword());
+            }else if(botonCambiarContra.isSelected()==false){
+                contraseña2= String.valueOf(passwordField.getPassword());
+            }
+            System.out.println("Contra 1: "+contraseña1);
+            System.out.println("Contra 2: "+contraseña2);
+            System.out.println("Estado del boton: "+botonCambiarContra.getSelectedIcon());
+            if(pgInicial.manejoUser.buscarUserNC(pgInicial.nombre, contraseña1)!=null && botonCambiarContra.isSelected()){
+                nuevaPartida.setEnabled(false);
+                miCuenta.setEnabled(false);
+                verMiInformacion.setEnabled(false);
+                cambiarPassword.setEnabled(false);
+                cerrarMiCuenta.setEnabled(false);
+                logOut.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Contraseña correcta! ingrese nueva contraseña");
+                botonCambiarContra.setText("Nueva contraseña");
+                passwordField.setText("");
+            }else if(logUser.getContraseña().equals(contraseña2) && botonCambiarContra.isSelected()==false){
+                JOptionPane.showMessageDialog(null, "Ingreso la misma contraseña! intentelo denuevo");
+                botonCambiarContra.setSelected(true);
+            }else if(pgInicial.manejoUser.buscarUserNC(pgInicial.nombre, contraseña2)== null && botonCambiarContra.isSelected()==false){
+                JOptionPane.showMessageDialog(null, "Contraseña cambiada!");
+                logUser.setContraseña(contraseña2);
+                cambiarPassword.setSelected(false);
+                botonCambiarContra.setSelected(false);
+                passwordField.setVisible(false);
+                tituloMini.setText("");
+                botonCambiarContra.setText("");
+                passwordField.setText("");
+                
+                nuevaPartida.setEnabled(true);
+                miCuenta.setEnabled(true);
+                verMiInformacion.setEnabled(true);
+                cambiarPassword.setEnabled(true);
+                cerrarMiCuenta.setEnabled(true);
+                logOut.setEnabled(true);
+                }else if(botonCambiarContra.isSelected()){
+                botonCambiarContra.setSelected(false);
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta!");
+                passwordField.setText("");
+            }
+        });
+        
+        botonCerrarCuenta.addActionListener((ActionEvent e) -> {
+            String contraseña= String.valueOf(passwordField.getPassword());
+            if(pgInicial.manejoUser.buscarUserNC(logUser.getNombre(), contraseña)!=null){
+                JOptionPane.showMessageDialog(null, "Cuenta eliminada!");
+                pgInicial.manejoUser.eliminarUser(logUser.getNombre(), contraseña);
+                pgInicial.frame.setVisible(true);
+                frame.dispose();
             }
         });
         
@@ -171,6 +354,7 @@ public class Pg_Principal extends Grafico{
         });
         
         logOut.addActionListener((ActionEvent e) -> {
+            logUser.setActivo(false);
             pgInicial.frame.setVisible(true);
             frame.dispose();
         });

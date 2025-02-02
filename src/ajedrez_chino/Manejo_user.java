@@ -31,8 +31,10 @@ public class Manejo_user {
             return null;
         }
         
-        if(infoUser[cont]!=null && infoUser[cont].getNombre().equals(name)){
-           return infoUser[cont];
+        if(infoUser[cont]!=null && infoUser[cont].getNombre()!=null){
+            if(infoUser[cont].getNombre().equals(name)){
+                return infoUser[cont];
+            }
         }
         
         return buscarUser(name, cont+1);
@@ -49,9 +51,10 @@ public class Manejo_user {
         }
         
         if(infoUser[cont]!=null){
-            if(infoUser[cont].getNombre().equals(name) && infoUser[cont].getContraseña().equals(contra)){
-           return infoUser[cont];
-            }
+            if(infoUser[cont].getNombre()!=null && infoUser[cont].getContraseña()!=null)
+                if(infoUser[cont].getNombre().equals(name) && infoUser[cont].getContraseña().equals(contra)){
+                    return infoUser[cont];
+                }
         }
         
         return buscarUserNC(name, contra, cont+1);
@@ -83,5 +86,25 @@ public class Manejo_user {
     
     public void agregarUser(String name, String contra){
         agregarUser(name, contra, 0);
+    }
+    
+    private void eliminarUser(String name, String contra, int cont){
+        if(cont>=infoUser.length){
+            System.out.println("No se encontro el usuario");
+            return;
+        }
+        
+        if(buscarUserNC(name, contra)!=null){
+            
+           infoUser[cont]= new Info_user(null, null);
+           return;
+        }
+        if(buscarUserNC(name, contra)==null){
+            agregarUser(name, contra, cont+1);
+        }
+    }
+    
+    public void eliminarUser(String name, String contra){
+        eliminarUser(name, contra, 0);
     }
 }
