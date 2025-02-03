@@ -19,6 +19,7 @@ public class Pg_AjedrezChino extends Grafico{
     JButton iniciarSesion = new JButton();
     JButton registrarse = new JButton();
     JButton salir = new JButton();
+    JButton [][]tableroBoton = new JButton[10][9];
     
     //Imagenes
     ImageIcon logoXiangqi= new ImageIcon("src/Imagenes/xiangqi.png");
@@ -30,11 +31,36 @@ public class Pg_AjedrezChino extends Grafico{
     
     String nombre;
     
+    public final void generarTablero(JFrame a){
+        int inicioX = 451, inicioY = 82, tamaño = 63;
+        
+        for (int filas = 0; filas <9 ; filas++) {
+            for (int columnas = 0; columnas < 8; columnas++) {
+                tableroBoton[filas][columnas] = new JButton();
+                tableroBoton[filas][columnas].setBounds(inicioX + (columnas * tamaño), inicioY + (filas * tamaño), tamaño, tamaño);
+                a.add(tableroBoton[filas][columnas]);
+                
+                if(filas!=4){
+                    tableroBoton[filas][columnas].setContentAreaFilled(false);
+                }
+            }
+        }
+        
+        for (int columnas = 0; columnas <8; columnas++) {
+            tableroBoton[4][columnas].setBorderPainted(false);
+            tableroBoton[4][columnas].setEnabled(false);
+        }
+    }
+    
     public Pg_AjedrezChino(){
+        
+        
+        
         manejoUser =new Manejo_user();
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
-
+        
+        generarTablero(frame);
         frame.add(tituloSuperior);
         frame.add(tablero);
         frame.add(iniciarSesion);
@@ -43,7 +69,7 @@ public class Pg_AjedrezChino extends Grafico{
         frame.add(backgroundForWords);
         frame.add(background);
         frame.setVisible(true);
-
+        
         //BACKGROUND
         fondo(background, 50, 50, backgroundI, frame);
 
@@ -62,6 +88,8 @@ public class Pg_AjedrezChino extends Grafico{
 
         //BOTON 3 salir del sistema
         boton(salir, 50, 600, 235, 42, false, false, "Dialog", 28, "Rendirse", 151, 19, 19, 250);
+        
+        
 
         iniciarSesion.addActionListener((ActionEvent e) -> {
             
