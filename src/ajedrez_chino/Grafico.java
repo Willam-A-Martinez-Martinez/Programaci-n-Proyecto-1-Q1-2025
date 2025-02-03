@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JToggleButton;
+import javax.swing.JComboBox;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
@@ -71,4 +72,6 @@ public class Grafico {
         a.setForeground(new Color(r, g, b, opaque));
         
     }
+    
+    
 }

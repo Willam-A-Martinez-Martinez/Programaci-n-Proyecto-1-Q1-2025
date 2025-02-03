@@ -133,4 +133,15 @@ public class Manejo_user {
         
         return ranking;
     }
+    
+    public String[] listaContrincantes(String []a, String logUser){
+        for (int i = 0; i < infoUser.length; i++) {
+            if(infoUser[i]!=null){
+               if(!infoUser[i].getNombre().equals(logUser)){
+                   a[i]=infoUser[i].getNombre();
+               }
+            }
+        }
+        return a;
+    }
 }

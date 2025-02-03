@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
+import javax.swing.UIManager;
 
 /**
  *
@@ -53,7 +55,6 @@ public class Pg_Principal extends Grafico{
     JPasswordField passwordField = new JPasswordField();
     
     JScrollPane scrollPane = new JScrollPane(contenedorScroll);
-
     
     //Imagenes
     ImageIcon logoXiangqi= new ImageIcon("src/Imagenes/xiangqi.png");
@@ -68,12 +69,14 @@ public class Pg_Principal extends Grafico{
     public Pg_Principal(Pg_Inicial pgInicial){
         this.pgInicial =pgInicial;
         
+        
+        
         Info_user logUser = pgInicial.manejoUser.buscarUser(pgInicial.nombre);
         
         
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
-
+        
         frame.add(tituloMini);
         frame.add(botonCambiarContra);
         frame.add(botonCerrarCuenta);
@@ -189,9 +192,19 @@ public class Pg_Principal extends Grafico{
         
         
         nuevaPartida.addActionListener((ActionEvent e) -> {
-            
-            
-            
+            if(pgInicial.manejoUser.cantUserHelp()!=1){
+                String []listaContrincantes= new String[pgInicial.manejoUser.cantUserHelp()];
+                pgInicial.manejoUser.listaContrincantes(listaContrincantes, logUser.getNombre());
+                String oponente =(String) JOptionPane.showInputDialog(null, "Seleccione el oponente", "Seleccion de oponente", JOptionPane.OK_OPTION, UIManager.getIcon("OptionPane.questionIcon"), listaContrincantes, listaContrincantes[0]);
+                if(oponente==null){
+                    JOptionPane.showMessageDialog(null, "Seleccione un oponente existente");
+                }else{
+                    Pg_AjedrezChino ajedrezCino = new Pg_AjedrezChino();
+                    
+                }
+                }else{
+                    JOptionPane.showMessageDialog(null, "No hay oponentes para jugar");
+                }
         });
 
         miCuenta.addActionListener((ActionEvent e) -> {
