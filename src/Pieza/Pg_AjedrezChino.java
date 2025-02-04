@@ -1,5 +1,7 @@
-package ajedrez_chino;
+package Pieza;
 
+import ajedrez_chino.Grafico;
+import ajedrez_chino.Manejo_user;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,26 +33,7 @@ public class Pg_AjedrezChino extends Grafico{
     
     String nombre;
     
-    public final void generarTablero(JFrame a){
-        int inicioX = 451, inicioY = 82, tamaño = 63;
-        
-        for (int filas = 0; filas <9 ; filas++) {
-            for (int columnas = 0; columnas < 8; columnas++) {
-                tableroBoton[filas][columnas] = new JButton();
-                tableroBoton[filas][columnas].setBounds(inicioX + (columnas * tamaño), inicioY + (filas * tamaño), tamaño, tamaño);
-                a.add(tableroBoton[filas][columnas]);
-                
-                if(filas!=4){
-                    tableroBoton[filas][columnas].setContentAreaFilled(false);
-                }
-            }
-        }
-        
-        for (int columnas = 0; columnas <8; columnas++) {
-            tableroBoton[4][columnas].setBorderPainted(false);
-            tableroBoton[4][columnas].setEnabled(false);
-        }
-    }
+    
     
     public Pg_AjedrezChino(){
         
@@ -60,7 +43,6 @@ public class Pg_AjedrezChino extends Grafico{
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
         
-        generarTablero(frame);
         frame.add(tituloSuperior);
         frame.add(tablero);
         frame.add(iniciarSesion);
@@ -101,6 +83,7 @@ public class Pg_AjedrezChino extends Grafico{
         });
         
         salir.addActionListener((ActionEvent e) -> {
+            
         });
     }
     

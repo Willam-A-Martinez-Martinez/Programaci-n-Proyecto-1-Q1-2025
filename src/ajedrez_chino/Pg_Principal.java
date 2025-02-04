@@ -4,6 +4,7 @@
  */
 package ajedrez_chino;
 
+import Pieza.Pg_AjedrezChino;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -143,7 +144,7 @@ public class Pg_Principal extends Grafico{
         //Password
         titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
         
-//        titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
+        //titulo(tituloMini, 750, 350, 300, 50, "Dialog", 24, 237, 235, 130, 250, "");
         
         //TITULO
         titulo(menuPrincipal, 150, 71, 300, 50, "Dialog", 28, 237, 235, 130, 250, "Menu principal");
@@ -184,6 +185,7 @@ public class Pg_Principal extends Grafico{
             toggleButton(logsDeJuegos, 150, 400, 270, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
         
             //rankingJugadores, logsDeJuegos
+            
         //BOTON 4 log out
         boton(logOut, 90, 390, 235, 42, false, false, "Dialog", 28, "Log out", 237, 235, 130, 250);
         
