@@ -3,16 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Pg_Inicial.java</file>
-            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Manejo_user.java</file>
-            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Log_Partida.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Test1/Test1.java</file>
             <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Info_user.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/oficialN.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/TorreN.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Pg_Inicial.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Oficial.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Manejo_user.java</file>
             <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Ajedrez_Chino.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Torre.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Grafico.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Tablero.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/tableroXiangqi.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Caballo.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Soldado.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Cañon.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/General.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Log_Partida.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/TorreR.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/cañonR.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/generalR.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/oficialR.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Imagenes/generalN.png</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Elefante.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/Pieza/Pieza.java</file>
             <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Iniciar_sesion.java</file>
             <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Registrarse.java</file>
-            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Grafico.java</file>
             <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Pg_Principal.java</file>
-            <file>file:/C:/Users/DELL/Desktop/Github/Ajedrez_Chino/src/ajedrez_chino/Pg_AjedrezChino.java</file>
         </group>
     </open-files>
 </project-private>

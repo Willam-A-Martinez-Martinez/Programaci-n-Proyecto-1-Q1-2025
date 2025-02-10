@@ -9,5 +9,12 @@ package Pieza;
  * @author DELL
  */
 public class Torre extends Pieza{
+    private Tablero tablero;
+
+    public Torre(Tablero tablero, Equipo color) {
+        super(color);
+        this.tablero = tablero;
+    }
+    
     
 }

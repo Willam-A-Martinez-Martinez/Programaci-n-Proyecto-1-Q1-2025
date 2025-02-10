@@ -8,6 +8,13 @@ package Pieza;
  *
  * @author DELL
  */
-public class Escudo extends Pieza{
+public class Oficial extends Pieza{
+    private Tablero tablero;
+
+    public Oficial(Tablero tablero, Equipo color) {
+        super(color);
+        this.tablero = tablero;
+    }
+    
     
 }

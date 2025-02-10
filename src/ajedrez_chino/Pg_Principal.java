@@ -4,7 +4,7 @@
  */
 package ajedrez_chino;
 
-import Pieza.Pg_AjedrezChino;
+import Pieza.Tablero;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -39,7 +39,7 @@ public class Pg_Principal extends Grafico{
     JLabel activo = new JLabel();
     JLabel tituloMini = new JLabel();
     
-    JTextArea contenedorScroll = new JTextArea();
+    
     
     //botonMiniVentana, nuevaPartida, miCuenta, verMiInformacion, cambiarPassword, cerrarMiCuenta, reportesMenu, rankingJugadores, logsDeJuegos, logOut
     JButton nuevaPartida = new JButton();
@@ -55,6 +55,7 @@ public class Pg_Principal extends Grafico{
     JButton logOut = new JButton();
     JPasswordField passwordField = new JPasswordField();
     
+    JTextArea contenedorScroll = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(contenedorScroll);
     
     //Imagenes
@@ -201,7 +202,7 @@ public class Pg_Principal extends Grafico{
                 if(oponente==null){
                     JOptionPane.showMessageDialog(null, "Seleccione un oponente existente");
                 }else{
-                    Pg_AjedrezChino ajedrezCino = new Pg_AjedrezChino();
+                    Tablero ajedrezCino = new Tablero();
                     
                 }
                 }else{

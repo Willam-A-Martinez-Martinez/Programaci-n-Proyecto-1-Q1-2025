@@ -8,6 +8,6 @@ package Pieza;
  *
  * @author DELL
  */
-public enum Color {
+public enum Equipo {
     ROJO, NEGRO
 }
