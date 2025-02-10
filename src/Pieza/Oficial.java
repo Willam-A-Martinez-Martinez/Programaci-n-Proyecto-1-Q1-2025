@@ -16,5 +16,22 @@ public class Oficial extends Pieza{
         this.tablero = tablero;
     }
     
-    
+    public boolean piezaMovimiento(int filaInicial, int columnaInicial, int filaSiguiente, int columnaSiguiente){
+        
+        
+        if(equipo==Equipo.ROJO){
+            if(columnaSiguiente<=5 && columnaSiguiente>=3 && filaSiguiente<=2 
+            && (filaInicial+1==filaSiguiente || filaInicial-1==filaSiguiente) 
+            && (columnaInicial-1==columnaSiguiente || columnaInicial+1==columnaSiguiente)){
+                return true;
+            }
+        }else if(equipo==Equipo.NEGRO){
+            if(columnaSiguiente<=5 && columnaSiguiente>=3 && filaSiguiente>=8 
+            && (filaInicial+1==filaSiguiente || filaInicial-1==filaSiguiente) 
+            && (columnaInicial-1==columnaSiguiente || columnaInicial+1==columnaSiguiente)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

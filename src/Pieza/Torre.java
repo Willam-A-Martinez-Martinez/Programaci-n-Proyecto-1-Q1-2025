@@ -16,5 +16,20 @@ public class Torre extends Pieza{
         this.tablero = tablero;
     }
     
-    
+    public boolean piezaMovimiento(int filaInicial, int columnaInicial, int filaSiguiente, int columnaSiguiente){
+        
+        if(this.equipo.equals(tablero.getPiezaComer(filaSiguiente, columnaSiguiente).equipo)){
+            return false;
+        }
+        
+        if(equipo==Equipo.ROJO){
+            if(((filaInicial>filaSiguiente || filaInicial<filaSiguiente) && columnaInicial==columnaSiguiente) || 
+                    ((columnaInicial>columnaSiguiente || columnaInicial<columnaSiguiente) && filaInicial==filaSiguiente)){
+                return true;
+            }
+        }else if(equipo==Equipo.NEGRO){
+            
+        }
+        return false;
+    }
 }
