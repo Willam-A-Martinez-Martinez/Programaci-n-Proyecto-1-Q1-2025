@@ -18,8 +18,10 @@ public class General extends Pieza{
     
     public boolean piezaMovimiento(int filaInicial, int columnaInicial, int filaSiguiente, int columnaSiguiente){
         
-        if(this.equipo.equals(tablero.getPiezaComer(filaSiguiente, columnaSiguiente).equipo)){
-            return false;
+        if(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente)!=null){
+            if(this.equipo.equals(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente).equipo)){
+                return false;
+            }
         }
         return false;
     }

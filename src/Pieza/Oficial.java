@@ -18,6 +18,11 @@ public class Oficial extends Pieza{
     
     public boolean piezaMovimiento(int filaInicial, int columnaInicial, int filaSiguiente, int columnaSiguiente){
         
+        if(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente)!=null){
+            if(this.equipo.equals(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente).equipo)){
+                return false;
+            }
+        }
         
         if(equipo==Equipo.ROJO){
             if(columnaSiguiente<=5 && columnaSiguiente>=3 && filaSiguiente<=2 

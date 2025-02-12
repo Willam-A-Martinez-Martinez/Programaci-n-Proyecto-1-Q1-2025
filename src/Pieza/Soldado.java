@@ -14,14 +14,19 @@ public class Soldado extends Pieza{
     
     public boolean piezaMovimiento(int filaInicial, int columnaInicial, int filaSiguiente, int columnaSiguiente){
         
-        if(this.equipo.equals(tablero.getPiezaComer(filaSiguiente, columnaSiguiente).equipo)){
-            return false;
+        if(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente)!=null){
+            if(this.equipo.equals(tablero.getSiguienteCoords(filaSiguiente, columnaSiguiente).equipo)){
+                return false;
+            }
         }
-        
         if(equipo==Equipo.ROJO){
             
-            if(filaInicial>=0 && filaInicial<=4){
+            if(filaInicial>=0 && filaInicial<4){
                 if(filaInicial+1==filaSiguiente && columnaInicial==columnaSiguiente){
+                    return true;
+                }
+            }else if(filaInicial==4){
+                if(filaInicial+2==filaSiguiente && columnaInicial==columnaSiguiente){
                     return true;
                 }
             }else if(filaInicial>=6 && filaInicial<=10){
@@ -30,8 +35,12 @@ public class Soldado extends Pieza{
                 }
             }
         }else if(equipo==Equipo.NEGRO){
-            if(filaInicial>=6 && filaInicial<=10){
+            if(filaInicial>6 && filaInicial<=10){
                 if(filaInicial-1==filaSiguiente && columnaInicial==columnaSiguiente){
+                    return true;
+                }
+            }else if(filaInicial==6){
+                if(filaInicial-2==filaSiguiente && columnaInicial==columnaSiguiente){
                     return true;
                 }
             }else if(filaInicial>=0 && filaInicial<=4){
