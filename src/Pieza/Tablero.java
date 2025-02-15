@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -24,6 +25,9 @@ public class Tablero extends Grafico{
     JLabel logMovimientos = new JLabel();
     JLabel backgroundForWords = new JLabel();
     JLabel background = new JLabel();
+    JLabel indicadorTurno = new JLabel();
+    JPanel capturasJugador1= new JPanel();
+    JPanel capturasJugador2= new JPanel();
     JButton salir = new JButton();
     
     JTextArea contenedorScroll = new JTextArea();
@@ -87,7 +91,9 @@ public class Tablero extends Grafico{
             tablero[5][columnas].setBackground(java.awt.Color.blue);
             tablero[5][columnas].setEnabled(false);
         }
-        
+        frame.add(indicadorTurno);
+        frame.add(capturasJugador1);
+        frame.add(capturasJugador2);
         frame.add(scrollPane);
         frame.add(jugador2);
         frame.add(logMovimientos);
@@ -114,6 +120,15 @@ public class Tablero extends Grafico{
         //Titulo de jugador 1
         titulo(jugador1, 100, 300, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Jugador 2");
 
+        //Indicador de turno
+        titulo(indicadorTurno, 900, 50, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Turno de: ");
+        
+        //Log de piezas capturadas de parte del jugador 1
+        
+        
+        //Log de piezas capturadas de parte del jugador 2
+        
+        
         //Titulo de log de movimientos
         titulo(logMovimientos, 900, 150, 250, 42, "Dialog", 24, 151, 19, 19, 250, "Log de movimientos");
         
@@ -190,8 +205,11 @@ public class Tablero extends Grafico{
         return pieza[filaSiguiente][columnaSiguiente];
     }
     
-    public void cambioCoords(int fSiguiente, int cSiguiente){
-        
+    public boolean existePieza(int fila, int columna){
+        if(pieza[fila][columna]!=null){
+            return true;
+        }
+        return false;
     }
     
     public void click(int f, int c){

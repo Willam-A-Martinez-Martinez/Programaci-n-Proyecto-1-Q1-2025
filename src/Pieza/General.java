@@ -23,6 +23,24 @@ public class General extends Pieza{
                 return false;
             }
         }
+        
+        if(equipo==Equipo.ROJO){
+            if(columnaSiguiente<=5 && columnaSiguiente>=3 && filaSiguiente<=2 && 
+            ((columnaInicial-1==columnaSiguiente && filaInicial==filaSiguiente) || 
+            (columnaInicial+1==columnaSiguiente && filaInicial==filaSiguiente) || 
+            (filaInicial-1==filaSiguiente && columnaInicial==columnaSiguiente) || 
+            (filaInicial+1==filaSiguiente && columnaInicial==columnaSiguiente))){
+                return true;
+            }
+        }else if(equipo==Equipo.NEGRO){
+            if(columnaSiguiente<=5 && columnaSiguiente>=3 && filaSiguiente>=8 && 
+            ((columnaInicial-1==columnaSiguiente && filaInicial==filaSiguiente) || 
+            (columnaInicial+1==columnaSiguiente && filaInicial==filaSiguiente) || 
+            (filaInicial-1==filaSiguiente && columnaInicial==columnaSiguiente) || 
+            (filaInicial+1==filaSiguiente && columnaInicial==columnaSiguiente))){
+                return true;
+            }
+        }
         return false;
     }
 }
