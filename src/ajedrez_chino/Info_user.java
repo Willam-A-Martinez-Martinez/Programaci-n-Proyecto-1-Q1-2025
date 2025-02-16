@@ -69,7 +69,7 @@ public class Info_user {
         return cantLogs(0,0);
     }
     
-    private void agregarLog(String jugador1, String jugador2, String ganador, int cont){
+    private void agregarLog(String jugador1, String jugador2, String ganador, String perdedor, String tipoVictoria, int cont){
         if(cont>=logPartida.length){
             System.out.println("No hay mas espacio en el arreglo");
             return;
@@ -77,23 +77,32 @@ public class Info_user {
         
         if(logPartida[cont]==null){
             
-           logPartida[cont]= new Log_Partida(jugador1, jugador2, ganador);
+           logPartida[cont]= new Log_Partida(jugador1, jugador2, ganador, perdedor, tipoVictoria);
+            System.out.println("Log de partida: "+logPartida[cont].logPartidaImprimir());
            return;
         }
         if(logPartida[cont]!=null){
-            agregarLog(jugador1, jugador2, ganador, cont+1);
+            agregarLog(jugador1, jugador2, ganador, perdedor, tipoVictoria, cont+1);
         }
     }
     
-    public void agregarLog(String jugador1, String jugador2, String ganador){
-        agregarLog(jugador1, jugador2, ganador, 0);
+    public void agregarLog(String jugador1, String jugador2, String ganador, String perdedor, String tipoVictoria){
+        agregarLog(jugador1, jugador2, ganador, perdedor, tipoVictoria, 0);
+    }
+    
+    public void sumarPuntos(){
+        puntos+=3;
     }
     
     public String imprimirLogsJuegos(){
-        String logs="Logs de partidas\n";
-        
-        for (int i = cantLogs(); i > 0; i--) {
-            logs+=logPartida[i].logPartidaImprimir();
+        String logs="Logs de partidas\n\n";
+        if (logPartida == null || cantLogs() == 0) {
+            return "No hay logs de partidas.";
+        }
+        for (int i = cantLogs()-1; i >= 0; i--) {
+            if(logPartida[i]!=null){
+                logs+=logPartida[i].logPartidaImprimir();
+            }
         }
         return logs;
     }

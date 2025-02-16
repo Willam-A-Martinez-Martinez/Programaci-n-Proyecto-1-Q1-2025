@@ -74,10 +74,8 @@ public class Grafico {
         
     }
     
-    public void jPanel(JPanel a, int x, int y, int width, int heigth, String font, 
-    int fSize, int r , int g, int b, int opaque){
+    public void jPanel(JPanel a, int x, int y, int width, int heigth, int r , int g, int b, int opaque){
         a.setBounds(x, y, width, heigth);
-        a.setFont(new Font(font, Font.BOLD, fSize));
-        a.setForeground(new Color(r, g, b, opaque));
+        a.setBackground(new Color(r, g, b, opaque));
     }
 }

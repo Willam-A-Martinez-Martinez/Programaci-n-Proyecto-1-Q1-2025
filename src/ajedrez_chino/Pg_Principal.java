@@ -27,7 +27,7 @@ import javax.swing.UIManager;
  */
 public class Pg_Principal extends Grafico{
     //Libreria swing
-    JFrame frame = new JFrame();
+    public JFrame frame = new JFrame();
     JLabel menuPrincipal = new JLabel();
     JLabel backgroundForWords = new JLabel();
     JLabel background = new JLabel();
@@ -202,8 +202,10 @@ public class Pg_Principal extends Grafico{
                 if(oponente==null){
                     JOptionPane.showMessageDialog(null, "Seleccione un oponente existente");
                 }else{
-                    Tablero ajedrezCino = new Tablero();
-                    
+                    pgInicial.oponente=oponente;
+                    Tablero ajedrezChino = new Tablero(pgInicial);
+                    ajedrezChino.frame.setVisible(true);
+                    frame.setVisible(false);
                 }
                 }else{
                     JOptionPane.showMessageDialog(null, "No hay oponentes para jugar");

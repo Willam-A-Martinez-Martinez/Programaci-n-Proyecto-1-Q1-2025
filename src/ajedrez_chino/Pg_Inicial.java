@@ -22,9 +22,9 @@ public class Pg_Inicial extends Grafico{
     ImageIcon backgroundI= new ImageIcon("src/Imagenes/Background.gif");
     
     //Info de usuarios
-    Manejo_user manejoUser;
+    public Manejo_user manejoUser;
     
-    String nombre;
+    public String nombre, oponente;
     
     public Pg_Inicial(){
         manejoUser =new Manejo_user();

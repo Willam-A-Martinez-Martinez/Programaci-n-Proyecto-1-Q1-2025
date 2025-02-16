@@ -38,7 +38,7 @@ public class Elefante extends Pieza{
                 int coordMedioF= (filaInicial+filaSiguiente)/2;
                 int coordMedioC= (columnaInicial+columnaSiguiente)/2;
                 if((!tablero.existePieza(coordMedioF, coordMedioC)) 
-                && filaSiguiente<5){
+                && filaSiguiente>5){
                     return true;
                 }
             }

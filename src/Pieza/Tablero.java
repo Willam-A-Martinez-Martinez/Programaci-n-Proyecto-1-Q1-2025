@@ -1,10 +1,12 @@
 package Pieza;
 
-import Pieza.Equipo;
+//import ajedrez_chino.*;
 import ajedrez_chino.Grafico;
 import ajedrez_chino.Info_user;
-import ajedrez_chino.Manejo_user;
+import ajedrez_chino.Pg_Inicial;
+import ajedrez_chino.Pg_Principal;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +21,7 @@ import javax.swing.JTextArea;
 
 public class Tablero extends Grafico{
     // Libreria swing
-    JFrame frame = new JFrame();
+    public JFrame frame = new JFrame();
     JLabel jugador1 = new JLabel();
     JLabel jugador2 = new JLabel();
     JLabel logMovimientos = new JLabel();
@@ -28,7 +30,7 @@ public class Tablero extends Grafico{
     JLabel indicadorTurno = new JLabel();
     JPanel capturasJugador1= new JPanel();
     JPanel capturasJugador2= new JPanel();
-    JButton salir = new JButton();
+    JButton rendirse = new JButton();
     
     JTextArea contenedorScroll = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(contenedorScroll);
@@ -40,24 +42,24 @@ public class Tablero extends Grafico{
     ImageIcon backgroundI= new ImageIcon("src/Imagenes/Background.gif");
     
     // Info de usuarios
-    Manejo_user manejoUser;
+    Pg_Inicial pgInicial ;
     Equipo turnoP = Equipo.ROJO;
     Info_user logUser, oponente;
     
-    String nombre;
     
     JButton[][] tablero = new JButton[11][9];
     Pieza[][] pieza = new Pieza[11][9];
     
     int fSelect = -1, cSelect= -1;
     
-    public Tablero(){
-        
-        manejoUser =new Manejo_user();
+    public Tablero(Pg_Inicial pgInicial){
+        this.pgInicial= pgInicial;
+        logUser=pgInicial.manejoUser.buscarUser(pgInicial.nombre);
+        oponente=pgInicial.manejoUser.buscarUser(pgInicial.oponente);
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
         
-        int inicioX = 300, inicioY = 25, tamaño = 63;
+        int inicioX = 350, inicioY = 25, tamaño = 63;
         
         for (int filas = 0; filas <11 ; filas++) {
             for (int columnas = 0; columnas < 9; columnas++) {
@@ -98,7 +100,7 @@ public class Tablero extends Grafico{
         frame.add(jugador2);
         frame.add(logMovimientos);
         frame.add(jugador1);
-        frame.add(salir);
+        frame.add(rendirse);
         frame.add(backgroundForWords);
         frame.add(background);
         
@@ -112,38 +114,46 @@ public class Tablero extends Grafico{
 
         postBackground(backgroundForWords, 50, 25, 1200, 694, 236, 183, 86, 200, true);
 
-//        postBackground(tablero, 450, 40, 950, 650, 171, 49, 19, 220, false);
-//        tablero.setIcon(tableroIcon);
+        
+        //Paneles para imagenes de piezas capturadas
+        jPanel(capturasJugador1, 100, 100, 210, 195, 151, 19, 19, 100);
+        
+        jPanel(capturasJugador2, 100, 350, 210, 195, 151, 19, 19, 100);
         //Titulo de jugador 2
-        titulo(jugador2, 100, 50, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Jugador 1");
+        titulo(jugador1, 100, 50, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Capturas de "+logUser.getNombre());
 
         //Titulo de jugador 1
-        titulo(jugador1, 100, 300, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Jugador 2");
+        titulo(jugador2, 100, 300, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Capturas de "+oponente.getNombre());
 
         //Indicador de turno
-        titulo(indicadorTurno, 900, 50, 235, 42, "Dialog", 24, 151, 19, 19, 250, "Turno de: ");
-        
-        //Log de piezas capturadas de parte del jugador 1
-        
-        
-        //Log de piezas capturadas de parte del jugador 2
-        
+        titulo(indicadorTurno, 950, 50, 250, 42, "Dialog", 24, 151, 19, 19, 250, "Turno de: "+((turnoP==Equipo.ROJO)?logUser.getNombre()+" (Rojo)":oponente.getNombre()+" (Negro)"));
         
         //Titulo de log de movimientos
-        titulo(logMovimientos, 900, 150, 250, 42, "Dialog", 24, 151, 19, 19, 250, "Log de movimientos");
+        titulo(logMovimientos, 950, 150, 250, 42, "Dialog", 24, 151, 19, 19, 250, "Log de movimientos");
         
-        scrollPane.setBounds(895, 200, 250, 300);
+        scrollPane.setBounds(950, 200, 250, 300);
         contenedorScroll.setEditable(false);
         scrollPane.setOpaque(false);
         scrollPane.setVisible(true);
 
-        //BOTON 3 salir del sistema
-        boton(salir, 50, 600, 235, 42, false, false, "Dialog", 28, "Rendirse", 151, 19, 19, 250);
+        //BOTON 3 rendirse del sistema
+        boton(rendirse, 50, 600, 235, 42, false, false, "Dialog", 28, "Rendirse", 151, 19, 19, 250);
         
         
         
-        salir.addActionListener((ActionEvent e) -> {
+        rendirse.addActionListener((ActionEvent e) -> {
+            String ganador = (turnoP==Equipo.ROJO) ? oponente.getNombre() : logUser.getNombre();
+            String perdedor = (turnoP==Equipo.NEGRO) ? logUser.getNombre() : oponente.getNombre();
+            String tipoVictoria="retiro";
+            JOptionPane.showMessageDialog(null, "JUGADOR "+perdedor+" SE HA RETIRADO, FELICIDADES JUGADOR "+ganador+", HAS GANADO 3 PUNTOS", "Partida terminada", JOptionPane.YES_OPTION);
+
+            pgInicial.manejoUser.buscarUser(ganador).sumarPuntos();
+            pgInicial.manejoUser.buscarUser(ganador).agregarLog(logUser.getNombre(), oponente.getNombre(), ganador, perdedor, tipoVictoria);
             
+            pgInicial.manejoUser.buscarUser(perdedor).agregarLog(logUser.getNombre(), oponente.getNombre(), ganador, perdedor, tipoVictoria);
+            Pg_Principal pgPrincipal = new Pg_Principal(pgInicial);
+            pgPrincipal.frame.setVisible(true);
+            frame.setVisible(false);
         });
     }
     
@@ -197,6 +207,25 @@ public class Tablero extends Grafico{
         return "";
     }
     
+    public void agregarCapturaImg(Pieza pieza){
+        if(pieza!=null){    
+            JLabel piezaCap = new JLabel();
+            piezaCap.setSize(40, 40);
+
+            String imgPath = imagenR + obtenerImagePieza(pieza);
+            ImageIcon icon = new ImageIcon(imgPath);
+            
+            Image image = icon.getImage();
+            Image newImg = image.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            piezaCap.setIcon(new ImageIcon(newImg));
+            if(turnoP== Equipo.ROJO){
+                capturasJugador1.add(piezaCap);
+            }if(turnoP== Equipo.NEGRO){
+                capturasJugador2.add(piezaCap);
+            }
+        }
+    }
+    
     public Pieza getPieza(int filaInicial, int columnaInicial){
         return pieza[filaInicial][columnaInicial];
     }
@@ -238,11 +267,12 @@ public class Tablero extends Grafico{
         
         if(pieza[fInicial][cInicial]!=null){
             if(piezaI.piezaMovimiento(fInicial, cInicial, fSiguiente, cSiguiente)){
+                agregarCapturaImg(pieza[fSiguiente][cSiguiente]);
                 pieza[fSiguiente][cSiguiente]=piezaI;
                 pieza[fInicial][cInicial]=null;
 
                 if(piezaC instanceof General){
-                    //Funcion de ganar
+                    comerRey(piezaC);
                     return;
                 }
 
@@ -257,23 +287,15 @@ public class Tablero extends Grafico{
                     return;
                 }
             
-            
+                
                 String img = imagenR+obtenerImagePieza(pieza[fSiguiente][cSiguiente]);
                 tablero[fSiguiente][cSiguiente].setIcon(new ImageIcon(img));
                 tablero[fInicial][cInicial].setIcon(null);
 
                 turnoP=(turnoP==Equipo.ROJO)?Equipo.NEGRO:Equipo.ROJO;
+                indicadorTurno.setText((turnoP==Equipo.ROJO)?logUser.getNombre()+" (Rojo)":oponente.getNombre()+" (Negro)");
             }
         }
-//            
-//            if(pieza[fInicial][cInicial].piezaMovimiento(fInicial, cInicial, fSiguiente, cSiguiente)){
-//                pieza[fSiguiente][cSiguiente]=pieza[fInicial][cInicial];
-//                tablero[fInicial][cInicial].setIcon(null);
-//                pieza[fInicial][cInicial]=null;
-//
-//                
-//            }
-//        }
     }
     
     public void posiblesPosiciones(int f, int c){
@@ -332,8 +354,20 @@ public class Tablero extends Grafico{
         return false;
     }
     
-    
-    public static void main(String[] args) {
-        new Tablero();
+    public void comerRey(Pieza pieza){
+        String ganador = (pieza.equipo==Equipo.NEGRO) ? logUser.getNombre() : oponente.getNombre();
+        String perdedor = (pieza.equipo==Equipo.NEGRO) ? oponente.getNombre() : logUser.getNombre();
+        String tipoVictoria="capturo al general";
+        JOptionPane.showMessageDialog(null, "JUGADOR "+ganador+" A VENCIDO A JUGADOR "+perdedor+
+        "\n FELICIDADES JUGADOR "+ganador+" HAS GANADO 3 PUNTOS", "Partida terminada", JOptionPane.YES_OPTION);
+        
+        pgInicial.manejoUser.buscarUser(ganador).sumarPuntos();
+        pgInicial.manejoUser.buscarUser(ganador).agregarLog(logUser.getNombre(), oponente.getNombre(), ganador, perdedor, tipoVictoria);
+        
+        pgInicial.manejoUser.buscarUser(perdedor).agregarLog(logUser.getNombre(), oponente.getNombre(), ganador, perdedor, tipoVictoria);
+        Pg_Principal pgPrincipal = new Pg_Principal(pgInicial);
+        pgPrincipal.frame.setVisible(true);
+        frame.setVisible(false);
+        
     }
 }

@@ -9,41 +9,44 @@ package ajedrez_chino;
  * @author DELL
  */
 public class Log_Partida {
-    String jugador1, jugador2, ganador;
+    String jugador1, jugador2, ganador, perdedor, tipoVictoria;
 
-    public Log_Partida(String usuario, String contrincante, String ganador) {
-        this.jugador1 = usuario;
-        this.jugador2 = contrincante;
+    public Log_Partida(String jugador1, String jugador2, String ganador, String perdedor, String tipoVictoria) {
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
         this.ganador = ganador;
+        this.perdedor = perdedor;
+        this.tipoVictoria = tipoVictoria;
     }
 
     public String getJugador1() {
         return jugador1;
     }
 
-    public void setJugador1(String jugador1) {
-        this.jugador1 = jugador1;
-    }
-
     public String getJugador2() {
         return jugador2;
-    }
-
-    public void setJugador2(String jugador2) {
-        this.jugador2 = jugador2;
     }
 
     public String getGanador() {
         return ganador;
     }
 
-    public void setGanador(String ganador) {
-        this.ganador = ganador;
+    public String getPerdedor() {
+        return perdedor;
+    }
+
+    public String getTipoDeVictoria() {
+        return tipoVictoria;
     }
     
     
     
     public String logPartidaImprimir(){
-        return "Judador 1: "+jugador1+"| Jugador 2: "+jugador2+"\nGanador: "+ganador+"\n";
+        String tipoV = tipoVictoria.equals("retiro") ? perdedor + " se retiró del juego"
+                :ganador + " capturó al rey de " + perdedor;
+        String log=("Judador 1: "+jugador1+" VS. Jugador 2: "+jugador2
+                +"\nGanador: "+ganador+" | Perdedor: "+perdedor
+                +"\nTipo de victoria: \n"+tipoV)+"\n\n";
+        return log;
     }
 }
