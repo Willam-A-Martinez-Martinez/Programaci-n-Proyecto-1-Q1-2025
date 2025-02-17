@@ -1,6 +1,6 @@
 package ajedrez_chino;
 
-public class Manejo_user {
+public class Manejo_user implements manejoDatos{
     Info_user [] infoUser;
     
     public Manejo_user(){
@@ -67,6 +67,7 @@ public class Manejo_user {
     //Agregar usuario
     
     private void agregarUser(String name, String contra, int cont){
+        name = name.trim().replaceAll("\\s+", " ");
         if(cont>=infoUser.length){
             System.out.println("No hay mas espacio en el arreglo");
             return;
@@ -88,25 +89,26 @@ public class Manejo_user {
         agregarUser(name, contra, 0);
     }
     
-    private void eliminarUser(String name, String contra, int cont){
-        if(cont>=infoUser.length){
-            System.out.println("No se encontro el usuario");
+    private void eliminarUser(String name, String contra, int cont) {
+    if (cont >= infoUser.length) {
+        System.out.println("No se encontró el usuario.");
+        return;
+    }
+
+    if (infoUser[cont] != null && infoUser[cont].getNombre() != null && infoUser[cont].getContraseña() != null) {
+        if (infoUser[cont].getNombre().equals(name) && infoUser[cont].getContraseña().equals(contra)) {
+            infoUser[cont] = null;
+            System.out.println("Usuario eliminado: " + name);
             return;
         }
-        
-        if(buscarUserNC(name, contra)!=null){
-            
-           infoUser[cont]= new Info_user(null, null);
-           return;
-        }
-        if(buscarUserNC(name, contra)==null){
-            agregarUser(name, contra, cont+1);
-        }
     }
-    
-    public void eliminarUser(String name, String contra){
-        eliminarUser(name, contra, 0);
-    }
+
+    eliminarUser(name, contra, cont + 1);
+}
+
+public void eliminarUser(String name, String contra) {
+    eliminarUser(name, contra, 0);
+}
     
     public String rankingJugadores(){
         String ranking="Ranking de jugadores\n\nPuesto - Jugador - Puntos\n";
@@ -114,7 +116,7 @@ public class Manejo_user {
         
         for (int i = 0; i < cantUserHelp(); i++) {
             for (int j = 1; j < cantUserHelp(); j++) {
-                if(infoUser[i].getNombre()!=null){
+                if(infoUser[i]!=null){
                     if(infoUser[j-1].getPuntos()<infoUser[j].getPuntos()){
                         temp=infoUser[j-1];
                         infoUser[j-1]=infoUser[j];
@@ -125,7 +127,7 @@ public class Manejo_user {
         }
         
         for (int i = 0; i < cantUserHelp(); i++) {
-            if(infoUser[i].getNombre()!=null){
+            if(infoUser[i]!=null){
                 ranking+="      "+(i+1)+"     -       "+infoUser[i].getNombre()+"     -     "+infoUser[i].getPuntos()+"\n";
                 System.out.println(ranking);
             }

@@ -8,8 +8,8 @@ package ajedrez_chino;
  *
  * @author DELL
  */
-public class Log_Partida {
-    String jugador1, jugador2, ganador, perdedor, tipoVictoria;
+public final class Log_Partida {
+    final String jugador1, jugador2, ganador, perdedor, tipoVictoria;
 
     public Log_Partida(String jugador1, String jugador2, String ganador, String perdedor, String tipoVictoria) {
         this.jugador1 = jugador1;
@@ -19,32 +19,32 @@ public class Log_Partida {
         this.tipoVictoria = tipoVictoria;
     }
 
-    public String getJugador1() {
+    public final String getJugador1() {
         return jugador1;
     }
 
-    public String getJugador2() {
+    public final String getJugador2() {
         return jugador2;
     }
 
-    public String getGanador() {
+    public final String getGanador() {
         return ganador;
     }
 
-    public String getPerdedor() {
+    public final String getPerdedor() {
         return perdedor;
     }
 
-    public String getTipoDeVictoria() {
+    public final String getTipoDeVictoria() {
         return tipoVictoria;
     }
     
     
     
-    public String logPartidaImprimir(){
+    public final String logPartidaImprimir(){
         String tipoV = tipoVictoria.equals("retiro") ? perdedor + " se retiró del juego"
                 :ganador + " capturó al rey de " + perdedor;
-        String log=("Judador 1: "+jugador1+" VS. Jugador 2: "+jugador2
+        String log=(jugador1+" VS. "+jugador2
                 +"\nGanador: "+ganador+" | Perdedor: "+perdedor
                 +"\nTipo de victoria: \n"+tipoV)+"\n\n";
         return log;

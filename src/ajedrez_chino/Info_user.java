@@ -3,7 +3,7 @@ package ajedrez_chino;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
         
-public class Info_user {
+public class Info_user implements manejoLog{
     private String contraseña, nombre, fecha;
     private int puntos;
     private boolean activo;

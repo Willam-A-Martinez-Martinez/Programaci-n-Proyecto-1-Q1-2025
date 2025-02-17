@@ -6,6 +6,7 @@ import ajedrez_chino.Info_user;
 import ajedrez_chino.Pg_Inicial;
 import ajedrez_chino.Pg_Principal;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -16,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 
 
@@ -28,6 +31,8 @@ public class Tablero extends Grafico{
     JLabel backgroundForWords = new JLabel();
     JLabel background = new JLabel();
     JLabel indicadorTurno = new JLabel();
+    JLabel filaTxt[] = new JLabel[11];
+    JLabel columnaTxt[] = new JLabel[9];
     JPanel capturasJugador1= new JPanel();
     JPanel capturasJugador2= new JPanel();
     JButton rendirse = new JButton();
@@ -35,7 +40,7 @@ public class Tablero extends Grafico{
     JTextArea contenedorScroll = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(contenedorScroll);
     
-    String imagenR = "src/Imagenes/";
+    String imagenR = "src/Imagenes/", logMovTxt="";
     
     // Imagenes
     ImageIcon logoXiangqi= new ImageIcon("src/Imagenes/xiangqi.png");
@@ -59,32 +64,106 @@ public class Tablero extends Grafico{
         //FRAME
         confFrame(frame, logoXiangqi, "Segmented & Corp", 1300, 1000);
         
-        int inicioX = 350, inicioY = 25, tamaño = 63;
+        int inicioX = 360, inicioY = 25, tamaño = 59, tamañoFont=28;
         
         for (int filas = 0; filas <11 ; filas++) {
+            filaTxt[filas]= new JLabel();
+            filaTxt[filas].setBounds(inicioX-tamaño+35, inicioY+(filas*tamaño), tamaño-30, tamaño);
+            switch(filas){
+                case 0:
+                    filaTxt[filas].setText("J");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 1:
+                    filaTxt[filas].setText("I");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 2:
+                    filaTxt[filas].setText("H");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 3:
+                    filaTxt[filas].setText("G");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 4:
+                    filaTxt[filas].setText("F");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 5:
+                    filaTxt[filas].setText("");
+                    break;
+                case 6:
+                    filaTxt[filas].setText("E");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 7:
+                    filaTxt[filas].setText("D");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 8:
+                    filaTxt[filas].setText("C");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 9:
+                    filaTxt[filas].setText("B");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                case 10:
+                    filaTxt[filas].setText("A");
+                    filaTxt[filas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    filaTxt[filas].setForeground(new Color(151, 19, 19, 250));
+                    break;
+                default:
+                    break;
+            }
+            frame.add(filaTxt[filas]);
             for (int columnas = 0; columnas < 9; columnas++) {
                 tablero[filas][columnas] = new JButton();
                 tablero[filas][columnas].setBounds(inicioX + (columnas * tamaño), inicioY + (filas * tamaño), tamaño, tamaño);
                 frame.add(tablero[filas][columnas]);
                 
                 if(filas>=0 && filas<=4 || filas>=6 && filas<=11){
-                    tablero[filas][columnas].setBackground(java.awt.Color.WHITE);
+                    tablero[filas][columnas].setBackground(new Color(252, 175, 62, 250));
                 }
                                             
                 if((filas>=0 && filas<=2 || filas>=8 && filas<=10) && columnas>2 && columnas<6){
-                    tablero[filas][columnas].setBackground(new Color(207, 207, 207, 250));
+                    tablero[filas][columnas].setBackground(new Color(203, 147, 65 , 250));
                 }
                 
-                if(filas!=4){
+                if(filas!=5){
                     tablero[filas][columnas].setContentAreaFilled(true);
+                    tablero[filas][columnas].setBorderPainted(true);
+                    tablero[filas][columnas].setBorder(new LineBorder(Color.BLACK));
                 }
                 
-                asignarEquipoPieza(filas, columnas);
+                if(filas==10){
+                    columnaTxt[columnas] = new JLabel();
+                    columnaTxt[columnas].setBounds(inicioX + (columnas * tamaño), inicioY + (filas * tamaño) + 52, tamaño, tamaño - 15);
+                    columnaTxt[columnas].setFont(new Font("Dialog", Font.BOLD, tamañoFont));
+                    columnaTxt[columnas].setForeground(new Color(151, 19, 19, 250));
+
+                    columnaTxt[columnas].setText(String.valueOf(columnas + 1));
+                    columnaTxt[columnas].setHorizontalAlignment(SwingConstants.CENTER);
+                    
+                    frame.add(columnaTxt[columnas]);
+                }
+                
+                asignarEquipoPieza(filas, columnas, tamaño);
                 
                 final int f=filas;
                 final int c=columnas;
                 
-                tablero[f][c].addActionListener((ActionEvent e) -> {click(f, c);});
+                tablero[f][c].addActionListener((ActionEvent e) -> {click(f, c, tamaño);});
             }
         }
         
@@ -131,8 +210,11 @@ public class Tablero extends Grafico{
         //Titulo de log de movimientos
         titulo(logMovimientos, 950, 150, 250, 42, "Dialog", 24, 151, 19, 19, 250, "Log de movimientos");
         
-        scrollPane.setBounds(950, 200, 250, 300);
+        scrollPane.setBounds(925, 200, 300, 300);
         contenedorScroll.setEditable(false);
+        contenedorScroll.setBackground(new Color(151, 19, 19, 100));
+        contenedorScroll.setForeground(new Color(236, 183, 86, 250));
+        contenedorScroll.setFont(new Font("Dialog", Font.BOLD, 27));
         scrollPane.setOpaque(false);
         scrollPane.setVisible(true);
 
@@ -143,7 +225,7 @@ public class Tablero extends Grafico{
         
         rendirse.addActionListener((ActionEvent e) -> {
             String ganador = (turnoP==Equipo.ROJO) ? oponente.getNombre() : logUser.getNombre();
-            String perdedor = (turnoP==Equipo.NEGRO) ? logUser.getNombre() : oponente.getNombre();
+            String perdedor = (turnoP==Equipo.ROJO) ? logUser.getNombre() : oponente.getNombre();
             String tipoVictoria="retiro";
             JOptionPane.showMessageDialog(null, "JUGADOR "+perdedor+" SE HA RETIRADO, FELICIDADES JUGADOR "+ganador+", HAS GANADO 3 PUNTOS", "Partida terminada", JOptionPane.YES_OPTION);
 
@@ -157,7 +239,7 @@ public class Tablero extends Grafico{
         });
     }
     
-    private void asignarEquipoPieza(int fila, int columna){     
+    private void asignarEquipoPieza(int fila, int columna, int tamaño){     
         if(fila==0 || fila==10){
             if(columna==0 || columna==8){
                 pieza[fila][columna] = new Torre(this, fila==0?Equipo.ROJO:Equipo.NEGRO);
@@ -183,8 +265,15 @@ public class Tablero extends Grafico{
         }
         
         if (pieza[fila][columna] != null) {
-            String imagen = imagenR+obtenerImagePieza(pieza[fila][columna]);
-            tablero[fila][columna].setIcon(new ImageIcon(imagen));
+            
+            String imgPath = imagenR + obtenerImagePieza(pieza[fila][columna]);
+            ImageIcon icon = new ImageIcon(imgPath);
+            
+            Image image = icon.getImage();
+            Image newImg = image.getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
+            tablero[fila][columna].setIcon(new ImageIcon(newImg));
+            
+            
         }
     }
     
@@ -241,7 +330,7 @@ public class Tablero extends Grafico{
         return false;
     }
     
-    public void click(int f, int c){
+    public void click(int f, int c, int tamaño){
         if(fSelect == -1 && cSelect == -1){
             if(pieza[f][c]!=null && pieza[f][c].getEquipo().equals(turnoP)){
                 fSelect=f;
@@ -251,7 +340,7 @@ public class Tablero extends Grafico{
                 //que se muestre posibles posiciones \ Solo necesita la pieza y dos fors que recorran el arreglo
             }
         }else {
-            mover(fSelect, cSelect, f, c);
+            mover(fSelect, cSelect, f, c, tamaño);
             //Funcion que mueve la ficha
             System.out.println("Accedio a moverse");
             resetColorTablero();
@@ -261,13 +350,14 @@ public class Tablero extends Grafico{
         }
     }
     
-    public void mover(int fInicial, int cInicial, int fSiguiente, int cSiguiente){
+    public void mover(int fInicial, int cInicial, int fSiguiente, int cSiguiente, int tamaño){
         Pieza piezaI = pieza[fInicial][cInicial];
         Pieza piezaC = pieza[fSiguiente][cSiguiente];
         
         if(pieza[fInicial][cInicial]!=null){
             if(piezaI.piezaMovimiento(fInicial, cInicial, fSiguiente, cSiguiente)){
                 agregarCapturaImg(pieza[fSiguiente][cSiguiente]);
+                contenedorScroll.setText(logMov(fInicial, cInicial, fSiguiente, cSiguiente));
                 pieza[fSiguiente][cSiguiente]=piezaI;
                 pieza[fInicial][cInicial]=null;
 
@@ -286,14 +376,17 @@ public class Tablero extends Grafico{
                     JOptionPane.showMessageDialog(null, "Ingreso un movimiento invalido", "Movimiento invalido", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-            
                 
-                String img = imagenR+obtenerImagePieza(pieza[fSiguiente][cSiguiente]);
-                tablero[fSiguiente][cSiguiente].setIcon(new ImageIcon(img));
+                String imgPath = imagenR + obtenerImagePieza(pieza[fSiguiente][cSiguiente]);
+                ImageIcon icon = new ImageIcon(imgPath);
+            
+                Image image = icon.getImage();
+                Image newImg = image.getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
+                tablero[fSiguiente][cSiguiente].setIcon(new ImageIcon(newImg));
                 tablero[fInicial][cInicial].setIcon(null);
 
                 turnoP=(turnoP==Equipo.ROJO)?Equipo.NEGRO:Equipo.ROJO;
-                indicadorTurno.setText((turnoP==Equipo.ROJO)?logUser.getNombre()+" (Rojo)":oponente.getNombre()+" (Negro)");
+                indicadorTurno.setText("Turno de: "+((turnoP==Equipo.ROJO)?logUser.getNombre()+" (Rojo)":oponente.getNombre()+" (Negro)"));
             }
         }
     }
@@ -315,10 +408,10 @@ public class Tablero extends Grafico{
         for (int filas = 0; filas < 11; filas++) {
             for (int columnas = 0; columnas < 9; columnas++) {
                 if(filas>=0 && filas<=4 || filas>=6 && filas<=11){
-                    tablero[filas][columnas].setBackground(java.awt.Color.WHITE);
+                    tablero[filas][columnas].setBackground(new Color(252, 175, 62, 250));
                 }
                 if((filas>=0 && filas<=2 || filas>=8 && filas<=10) && columnas>2 && columnas<6){
-                    tablero[filas][columnas].setBackground(new Color(207, 207, 207, 250));
+                    tablero[filas][columnas].setBackground(new Color(203, 147, 65 , 250));
                 }
             }
         }
@@ -369,5 +462,44 @@ public class Tablero extends Grafico{
         pgPrincipal.frame.setVisible(true);
         frame.setVisible(false);
         
+    }
+    
+    public String logMov(int fInicial, int cInicial, int fSiguiente, int cSiguiente){
+        
+        String piezaOrigenStr = piezaNotacion(pieza[fInicial][cInicial]);
+        String piezaObjetivo = piezaNotacion(pieza[fSiguiente][cSiguiente]);
+        
+        String action="";
+        if(turnoP==Equipo.ROJO){
+            if(!piezaObjetivo.equals("")) action= "x"+piezaObjetivo;
+            else if (fSiguiente > fInicial) action = "+";
+            else if (fSiguiente < fInicial) action = "-";
+            else action = "=";
+        }if(turnoP==Equipo.NEGRO){
+            if(!piezaObjetivo.equals("")) action= "x"+piezaObjetivo;
+            else if (fSiguiente > fInicial) action = "-";
+            else if (fSiguiente < fInicial) action = "+";
+            else action = "=";
+        }
+            String movimiento = piezaOrigenStr + (cInicial + 1) + action + (cSiguiente + 1);
+        
+            if (turnoP == Equipo.ROJO) {
+            logMovTxt += movimiento + " - ";
+        } else if (turnoP == Equipo.NEGRO) {
+            logMovTxt += movimiento + "\n";
+        }
+
+        return logMovTxt;
+    }
+    
+    public String piezaNotacion(Pieza pieza){
+        if(pieza instanceof Caballo)return "C";
+        else if(pieza instanceof Elefante)return "E";
+        else if(pieza instanceof Cañon)return "Cn";
+        else if(pieza instanceof Oficial)return "O";
+        else if(pieza instanceof Torre)return "T";
+        else if(pieza instanceof General)return "G";
+        else if (pieza instanceof Soldado) return "S"; 
+        return "";
     }
 }

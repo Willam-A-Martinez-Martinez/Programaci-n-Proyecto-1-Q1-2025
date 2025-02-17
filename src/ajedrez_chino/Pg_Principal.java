@@ -185,6 +185,8 @@ public class Pg_Principal extends Grafico{
             //BOTON 3.2 Logs de mis últimos juegos
             toggleButton(logsDeJuegos, 150, 400, 270, 42, false, false, "Dialog", 28, "", 237, 235, 130, 250);
         
+            rankingJugadores.setEnabled(false);
+                logsDeJuegos.setEnabled(false);
             //rankingJugadores, logsDeJuegos
             
         //BOTON 4 log out
@@ -324,10 +326,15 @@ public class Pg_Principal extends Grafico{
                 JOptionPane.showMessageDialog(null, "Contraseña correcta! ingrese nueva contraseña");
                 botonCambiarContra.setText("Nueva contraseña");
                 passwordField.setText("");
+            }else if(botonCambiarContra.isSelected()==false && contraseña2.length()>5){
+                JOptionPane.showMessageDialog(null, "Ingreso una contraseña mayor a 5 characteres! intentelo denuevo");
+                botonCambiarContra.setSelected(true);
+                passwordField.setText("");
             }else if(logUser.getContraseña().equals(contraseña2) && botonCambiarContra.isSelected()==false){
                 JOptionPane.showMessageDialog(null, "Ingreso la misma contraseña! intentelo denuevo");
                 botonCambiarContra.setSelected(true);
-            }else if(pgInicial.manejoUser.buscarUserNC(pgInicial.nombre, contraseña2)== null && botonCambiarContra.isSelected()==false){
+                passwordField.setText("");
+            }else if(pgInicial.manejoUser.buscarUserNC(pgInicial.nombre, contraseña2)== null && botonCambiarContra.isSelected()==false && contraseña2.length()<=5){
                 JOptionPane.showMessageDialog(null, "Contraseña cambiada!");
                 logUser.setContraseña(contraseña2);
                 cambiarPassword.setSelected(false);
@@ -343,7 +350,7 @@ public class Pg_Principal extends Grafico{
                 cambiarPassword.setEnabled(true);
                 cerrarMiCuenta.setEnabled(true);
                 logOut.setEnabled(true);
-                }else if(botonCambiarContra.isSelected()){
+            }else if(botonCambiarContra.isSelected()){
                 botonCambiarContra.setSelected(false);
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta!");
                 passwordField.setText("");
@@ -422,6 +429,9 @@ public class Pg_Principal extends Grafico{
                 contenedorScroll.setBackground(new Color(171, 49, 19, 220));
                 
                 rankingJugadores.setSelected(false);
+                
+                scrollPane.setBounds(600, 200, 500, 350);
+                scrollPane.setOpaque(false);
                 scrollPane.setVisible(true);
             }else{
                 scrollPane.setVisible(false);

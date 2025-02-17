@@ -95,7 +95,7 @@ public class Registrarse extends Grafico{
             if(contraseña.length()==5 && pgInicial.manejoUser.buscarUser(nombre)==null){
                 JOptionPane.showConfirmDialog(null, "Se ha registrado exitosamente!", "Confirmacion", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 pgInicial.manejoUser.agregarUser(nombre, contraseña);
-                pgInicial.nombre=nombre;
+                pgInicial.nombre=nombre.trim().replaceAll("\\s+", " ");
                 Pg_Principal pgPrincipal= new Pg_Principal(pgInicial);
                 pgPrincipal.frame.setVisible(true);
                 frame.dispose();
