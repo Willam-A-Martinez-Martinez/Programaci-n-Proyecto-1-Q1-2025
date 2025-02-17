@@ -93,16 +93,16 @@ public class Registrarse extends Grafico{
             }
             
             if(contraseña.length()==5 && pgInicial.manejoUser.buscarUser(nombre)==null){
-                JOptionPane.showConfirmDialog(null, "Se ha registrado exitosamente!", "Confirmacion", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente!", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 pgInicial.manejoUser.agregarUser(nombre, contraseña);
                 pgInicial.nombre=nombre.trim().replaceAll("\\s+", " ");
                 Pg_Principal pgPrincipal= new Pg_Principal(pgInicial);
                 pgPrincipal.frame.setVisible(true);
                 frame.dispose();
             }else if(pgInicial.manejoUser.buscarUser(nombre)!=null){
-                JOptionPane.showConfirmDialog(null, "Ya existe un usuario con el mismo nombre.", "Confirmacion", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ya existe un usuario con el mismo nombre.", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showConfirmDialog(null, "Ingreso una contraseña que no es exactamente 5 letras!", "Confirmacion", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ingreso una contraseña que no es exactamente 5 letras!", "Confirmacion", JOptionPane.ERROR_MESSAGE);
             }
             
             

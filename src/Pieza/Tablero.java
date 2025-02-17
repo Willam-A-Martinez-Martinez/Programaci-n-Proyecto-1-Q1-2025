@@ -169,7 +169,7 @@ public class Tablero extends Grafico{
         
         for (int columnas = 0; columnas <9; columnas++) {
             tablero[5][columnas].setBorderPainted(false);
-            tablero[5][columnas].setBackground(java.awt.Color.blue);
+            tablero[5][columnas].setBackground(new Color(64, 164, 223 , 200));
             tablero[5][columnas].setEnabled(false);
         }
         frame.add(indicadorTurno);
@@ -353,40 +353,38 @@ public class Tablero extends Grafico{
     public void mover(int fInicial, int cInicial, int fSiguiente, int cSiguiente, int tamaño){
         Pieza piezaI = pieza[fInicial][cInicial];
         Pieza piezaC = pieza[fSiguiente][cSiguiente];
-        
-        if(pieza[fInicial][cInicial]!=null){
-            if(piezaI.piezaMovimiento(fInicial, cInicial, fSiguiente, cSiguiente)){
-                agregarCapturaImg(pieza[fSiguiente][cSiguiente]);
-                contenedorScroll.setText(logMov(fInicial, cInicial, fSiguiente, cSiguiente));
-                pieza[fSiguiente][cSiguiente]=piezaI;
-                pieza[fInicial][cInicial]=null;
 
-                if(piezaC instanceof General){
-                    comerRey(piezaC);
-                    return;
-                }
+        if (pieza[fInicial][cInicial] != null) {
+            if (piezaI.piezaMovimiento(fInicial, cInicial, fSiguiente, cSiguiente)) {
+                pieza[fSiguiente][cSiguiente] = piezaI;
+                pieza[fInicial][cInicial] = null;
+                
+                if (!reyesCantSee()) {
+                    pieza[fInicial][cInicial] = piezaI;
+                    pieza[fSiguiente][cSiguiente] = piezaC;
 
-                if(!reyesCantSee()){
-                    pieza[fInicial][cInicial]=piezaI;
-                    pieza[fSiguiente][cSiguiente]=piezaC;
-                    if(pieza[fInicial][cInicial]==null){
-                        System.out.println("");
-                    }
-                    
                     JOptionPane.showMessageDialog(null, "Ingreso un movimiento invalido", "Movimiento invalido", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 
-                String imgPath = imagenR + obtenerImagePieza(pieza[fSiguiente][cSiguiente]);
+                agregarCapturaImg(piezaC);
+                
+                if (piezaC instanceof General) {
+                    comerRey(piezaC);
+                    return;
+                }
+                
+                contenedorScroll.setText(logMov(fInicial, cInicial, fSiguiente, cSiguiente));
+                
+                String imgPath = imagenR + (obtenerImagePieza(pieza[fSiguiente][cSiguiente]).equals("generalN.png") ? "" : obtenerImagePieza(pieza[fSiguiente][cSiguiente]));
                 ImageIcon icon = new ImageIcon(imgPath);
-            
                 Image image = icon.getImage();
                 Image newImg = image.getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
                 tablero[fSiguiente][cSiguiente].setIcon(new ImageIcon(newImg));
                 tablero[fInicial][cInicial].setIcon(null);
-
-                turnoP=(turnoP==Equipo.ROJO)?Equipo.NEGRO:Equipo.ROJO;
-                indicadorTurno.setText("Turno de: "+((turnoP==Equipo.ROJO)?logUser.getNombre()+" (Rojo)":oponente.getNombre()+" (Negro)"));
+                
+                turnoP = (turnoP == Equipo.ROJO) ? Equipo.NEGRO : Equipo.ROJO;
+                indicadorTurno.setText("Turno de: " + ((turnoP == Equipo.ROJO) ? logUser.getNombre() + " (Rojo)" : oponente.getNombre() + " (Negro)"));
             }
         }
     }
@@ -484,9 +482,9 @@ public class Tablero extends Grafico{
             String movimiento = piezaOrigenStr + (cInicial + 1) + action + (cSiguiente + 1);
         
             if (turnoP == Equipo.ROJO) {
-            logMovTxt += movimiento + " - ";
+            logMovTxt += movimiento;
         } else if (turnoP == Equipo.NEGRO) {
-            logMovTxt += movimiento + "\n";
+            logMovTxt += " - "+movimiento + "\n";
         }
 
         return logMovTxt;
