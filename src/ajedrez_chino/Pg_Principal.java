@@ -281,10 +281,12 @@ public class Pg_Principal extends Grafico{
                 cerrarMiCuenta.setSelected(false);
                 passwordField.setVisible(true);
                 tituloMini.setText("Ingrese contraseña");
-                botonCambiarContra.setText("Cambiar ontraseña");
+                botonCambiarContra.setText("Cambiar contraseña");
+                botonCambiarContra.setEnabled(true);
                 botonCerrarCuenta.setText("");
             }else{
                 passwordField.setVisible(false);
+                botonCambiarContra.setEnabled(false);
                 tituloMini.setText("");
                 botonCambiarContra.setText("");
                 botonCerrarCuenta.setText("");
