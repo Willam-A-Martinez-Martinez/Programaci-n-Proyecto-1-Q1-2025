@@ -224,6 +224,8 @@ public class Tablero extends Grafico{
         
         
         rendirse.addActionListener((ActionEvent e) -> {
+            int opc = JOptionPane.showConfirmDialog(null, "Seguro que desea rendirse?", "Confirmacion", JOptionPane.YES_OPTION);
+            if(opc==0){
             String ganador = (turnoP==Equipo.ROJO) ? oponente.getNombre() : logUser.getNombre();
             String perdedor = (turnoP==Equipo.ROJO) ? logUser.getNombre() : oponente.getNombre();
             String tipoVictoria="retiro";
@@ -236,6 +238,7 @@ public class Tablero extends Grafico{
             Pg_Principal pgPrincipal = new Pg_Principal(pgInicial);
             pgPrincipal.frame.setVisible(true);
             frame.setVisible(false);
+            }
         });
     }
     
@@ -367,6 +370,8 @@ public class Tablero extends Grafico{
                     return;
                 }
                 
+                contenedorScroll.setText(logMov(fInicial, cInicial, fSiguiente, cSiguiente, piezaC, piezaI));
+                
                 agregarCapturaImg(piezaC);
                 
                 if (piezaC instanceof General) {
@@ -374,7 +379,7 @@ public class Tablero extends Grafico{
                     return;
                 }
                 
-                contenedorScroll.setText(logMov(fInicial, cInicial, fSiguiente, cSiguiente));
+                
                 
                 String imgPath = imagenR + (obtenerImagePieza(pieza[fSiguiente][cSiguiente]).equals("generalN.png") ? "" : obtenerImagePieza(pieza[fSiguiente][cSiguiente]));
                 ImageIcon icon = new ImageIcon(imgPath);
@@ -462,10 +467,10 @@ public class Tablero extends Grafico{
         
     }
     
-    public String logMov(int fInicial, int cInicial, int fSiguiente, int cSiguiente){
+    public String logMov(int fInicial, int cInicial, int fSiguiente, int cSiguiente, Pieza piezaCapturada, Pieza piezaOrigen){
         
-        String piezaOrigenStr = piezaNotacion(pieza[fInicial][cInicial]);
-        String piezaObjetivo = piezaNotacion(pieza[fSiguiente][cSiguiente]);
+        String piezaOrigenStr = piezaNotacion(piezaOrigen);
+        String piezaObjetivo = piezaNotacion(piezaCapturada);
         
         String action="";
         if(turnoP==Equipo.ROJO){

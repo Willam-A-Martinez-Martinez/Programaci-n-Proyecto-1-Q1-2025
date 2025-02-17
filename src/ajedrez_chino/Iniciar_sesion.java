@@ -98,9 +98,9 @@ public class Iniciar_sesion extends Grafico{
                 Pg_Principal pgPrincipal= new Pg_Principal(pgInicial);
                 pgPrincipal.frame.setVisible(true);
                 frame.dispose();
-            }else if(pgInicial.manejoUser.buscarUser(nombre)!=null){
+            }else if(pgInicial.manejoUser.buscarUser(nombre)==null){
                 JOptionPane.showMessageDialog(null, "No existe usuario", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-            }else{
+            }else if(contraseña.length()!=5){
                 JOptionPane.showMessageDialog(null, "Ingreso una contraseña que no es exactamente 5 letras!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
             }
         });

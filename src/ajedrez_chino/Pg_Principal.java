@@ -277,10 +277,11 @@ public class Pg_Principal extends Grafico{
         
         cambiarPassword.addActionListener((ActionEvent e) -> {
             if(cambiarPassword.isSelected()){
+                botonCambiarContra.setLocation(715, 475);
                 cerrarMiCuenta.setSelected(false);
                 passwordField.setVisible(true);
-                tituloMini.setText("Cambio contraseña");
-                botonCambiarContra.setText("Cambiar contraseña");
+                tituloMini.setText("Ingrese contraseña");
+                botonCambiarContra.setText("Cambiar ontraseña");
                 botonCerrarCuenta.setText("");
             }else{
                 passwordField.setVisible(false);
@@ -293,6 +294,8 @@ public class Pg_Principal extends Grafico{
         cerrarMiCuenta.addActionListener((ActionEvent e) -> {
             if(cerrarMiCuenta.isSelected()){
                 System.out.println("True cerrarMiCuenta");
+                botonCambiarContra.setLocation(0, 0);
+                botonCambiarContra.setEnabled(false);
                 cambiarPassword.setSelected(false);
                 passwordField.setVisible(true);
                 tituloMini.setText("Cierre de cuenta");
@@ -300,6 +303,8 @@ public class Pg_Principal extends Grafico{
                 botonCambiarContra.setText("");
             }else{
                 System.out.println("Cerrar mi cuenta toggle button accede aqui");
+                botonCambiarContra.setLocation(715, 475);
+                botonCambiarContra.setEnabled(true);
                 passwordField.setVisible(false);
                 tituloMini.setText("");
                 botonCerrarCuenta.setText("");
@@ -325,8 +330,9 @@ public class Pg_Principal extends Grafico{
                 logOut.setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Contraseña correcta! ingrese nueva contraseña");
                 botonCambiarContra.setText("Nueva contraseña");
+                tituloMini.setText("Cambio de contraseña");
                 passwordField.setText("");
-            }else if(botonCambiarContra.isSelected()==false && contraseña2.length()>5){
+            }else if(botonCambiarContra.isSelected()==false && contraseña2.length()!=5){
                 JOptionPane.showMessageDialog(null, "Ingreso una contraseña mayor a 5 characteres! intentelo denuevo");
                 botonCambiarContra.setSelected(true);
                 passwordField.setText("");
